@@ -1,47 +1,76 @@
-<div class="intro-y flex flex-col sm:flex-row items-center mt-8">
+
+<div class="m-8">
     <h2 class="text-lg font-medium mr-auto">
         <?= $title; ?>
     </h2>
 </div>
-<div class="m-5"> <a href="javascript:;" data-toggle="modal" data-target="#header-footer-modal-preview"
-        class="btn btn-primary m-1">Add
-        User</a> </div>
+<div class="m-5"> <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">
+    Add User
+  </button> </div>
+  <div id="ngilang">
+    <?= $this->session->flashdata('message') ?>
+</div>
 <!-- BEGIN: Datatable -->
 <div class="card datatable-wrapper p-5 mt-5">
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">No</th>
+                <th scope="col">Nama</th>
+                <th scope="col">Email</th>
+                <th scope="col">Level</th>
             </tr>
         </thead>
         <tbody>
+            <?php $i = 1; foreach($user as $u) : ?>
             <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+                <th scope="row"><?= $i++; ?></th>
+                <td><?= $u['name']; ?></td>
+                <td><?= $u['email'] ?></td>
+                <td><?= $u['level'] ?></td>
             </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
-            </tr>
+            <?php endforeach; ?>
         </tbody>
     </table>
 </div>
 <!-- END: Datatable -->
 
+<div class="modal fade" id="addUserModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Add User</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <form action="<?= base_url('User/addUser') ?>" method="post">
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Email address</label>
+    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Name</label>
+    <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Password</label>
+    <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+  </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+</div>
+</div>
+</form>
+  </div>
+</div>
+
 <!-- Tambah User Modal -->
-<div class="modal" id="addUserModal">
+<div class="modal" id="x">
     <div class="modal__content">
         <div class="flex items-center px-5 py-5 sm:py-3 border-b border-gray-200">
             <h2 class="font-medium text-base mr-auto">Add Users</h2>
@@ -54,7 +83,7 @@
                 </div>
             </div>
         </div>
-        <form class="p-5 grid grid-cols-12 gap-4 row-gap-3" id="addUser">
+        <form class="" id="addUser">
             <div class="col-span-12 sm:col-span-6">
                 <label>Name</label>
                 <input required type="text" class="input w-full border mt-2 flex-1" name="name" placeholder="Full Name">

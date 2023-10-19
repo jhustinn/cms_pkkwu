@@ -9,7 +9,7 @@ class Home extends CI_Controller
         $data['title'] = "Dashboard";
         $this->load->view('template/header', $data);
         // $this->load->view('template/navbar');
-        $this->load->view('admin/index');
+        $this->load->view('front/index');
         $this->load->view('template/footer');
     }
 

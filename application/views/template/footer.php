@@ -6,5 +6,8 @@
     <script src="<?= base_url() ?>assets/libs/simplebar/dist/simplebar.js"></script>
     <script src="<?= base_url() ?>assets/js/dashboard.js"></script>
     </body>
+    <script>
+      $('#ngilang').delay('slow').slideDown('slow').delay(3000).slideUp(600);
+    </script>
 
     </html>

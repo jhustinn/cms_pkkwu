@@ -5,23 +5,20 @@
             <div class="col-md-8 col-lg-6 col-xxl-3">
                 <div class="card mb-0">
                     <div class="card-body">
-                        <a href="<?= base_url() ?>index.html"
-                            class="text-nowrap logo-img text-center d-block py-3 w-100">
-                            <img src="<?= base_url() ?>assets/images/logos/dark-logo.svg" width="180" alt="">
-                        </a>
-                        <p class="text-center">Your Social Campaigns</p>
+                        <p class="text-center">Sign In</p>
+                        <?= $this->session->flashdata('message'); ?>
                         <form action="<?= base_url('auth') ?>" method="post">
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1"
+                                <input type="email" name="email" class="form-control" id="exampleInputEmail1"
                                     aria-describedby="emailHelp">
+                                    <?= form_error('email', '<small class="text-danger pl-3">', '</small>') ?>
                             </div>
                             <div class="mb-4">
-                                <label for="exampleInputPassword1" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1">
-                            </div>
-                            <div class="d-flex align-items-center justify-content-between mb-4">
-                                <a class="text-primary fw-bold" href="<?= base_url() ?>index.html">Forgot Password ?</a>
+                                <label for="password1" class="form-label">Password</label>
+                                <input type="password" name="password" class="form-control" id="password1">
+                                <?= form_error('password', '<small class="text-danger pl-3">', '</small>') ?>
+
                             </div>
                             <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Sign
                                 In</button>
