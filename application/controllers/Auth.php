@@ -55,7 +55,7 @@ class Auth extends CI_Controller
             // var_dump($user['password']);
             // die;
             // Cek password
-            if ($password==$user['password']) {
+            if ($password == $user['password']) {
                 $data = [
                     'email' => $user['email'],
                     'level' => $user['level']
@@ -88,21 +88,10 @@ class Auth extends CI_Controller
         $this->session->unset_userdata('email');
         $this->session->unset_userdata('level');
 
-        if ($this->input->is_ajax_request()) {
-            $res = [
-                'status' => 200,
-                'message' => 'You have been logout!',
-            ];
-            echo json_encode($res);
-
-        } else {
-            $res = [
-                'status' => 404,
-                'message' => 'Failed to logout!'
-            ];
-            echo json_encode($res);
-        }
-        // redirect('auth');
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            You have been logged out!
+        </div>');
+        redirect('auth');
     }
 
     public function blocked()

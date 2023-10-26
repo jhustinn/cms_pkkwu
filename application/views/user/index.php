@@ -1,13 +1,12 @@
-
 <div class="m-8">
     <h2 class="text-lg font-medium mr-auto">
         <?= $title; ?>
     </h2>
 </div>
 <div class="m-5"> <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">
-    Add User
-  </button> </div>
-  <div id="ngilang">
+        Add User
+    </button> </div>
+<div id="ngilang">
     <?= $this->session->flashdata('message') ?>
 </div>
 <!-- BEGIN: Datatable -->
@@ -22,51 +21,63 @@
             </tr>
         </thead>
         <tbody>
-            <?php $i = 1; foreach($user as $u) : ?>
-            <tr>
-                <th scope="row"><?= $i++; ?></th>
-                <td><?= $u['name']; ?></td>
-                <td><?= $u['email'] ?></td>
-                <td><?= $u['level'] ?></td>
-            </tr>
+            <?php $i = 1;
+            foreach ($user as $u): ?>
+                <tr>
+                    <th scope="row">
+                        <?= $i++; ?>
+                    </th>
+                    <td>
+                        <?= $u['name']; ?>
+                    </td>
+                    <td>
+                        <?= $u['email'] ?>
+                    </td>
+                    <td>
+                        <?= $u['level'] ?>
+                    </td>
+                </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
 </div>
 <!-- END: Datatable -->
 
-<div class="modal fade" id="addUserModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Add User</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      <form action="<?= base_url('User/addUser') ?>" method="post">
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Email address</label>
-    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Name</label>
-    <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Password</label>
-    <input type="password" name="password" class="form-control" id="exampleInputPassword1">
-  </div>
-</div>
-<div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-    <button type="submit" class="btn btn-primary">Submit</button>
+<div class="modal fade" id="addUserModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Add User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="<?= base_url('User/addUser') ?>" method="post">
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Email address</label>
+                        <input type="email" name="email" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp">
+                        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Name</label>
+                        <input type="text" name="name" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp">
+                        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Password</label>
+                        <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
 
-</div>
-</div>
-</form>
-  </div>
+            </div>
+        </div>
+        </form>
+    </div>
 </div>
 
 <!-- Tambah User Modal -->

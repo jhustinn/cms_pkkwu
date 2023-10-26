@@ -65,7 +65,7 @@
                         </li>
                         <li class="nav-item mt-2 mt-lg-0"><a
                                 class="nav-link btn btn-light text-black w-md-25 w-50 w-lg-100" aria-current="page"
-                                href="#">Log In</a></li>
+                                href="<?= base_url('auth') ?>">Log In</a></li>
                     </ul>
                 </div>
             </div>

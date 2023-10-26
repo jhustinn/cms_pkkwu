@@ -14,12 +14,10 @@ class Configuration extends CI_Controller
     public function index()
     {
         $data['title'] = "Configuration";
-        $data['admin'] = $this->user->get_user_by_email($this->session->userdata('email'));
+        $data['admin'] = $this->session->userdata('email');
         $data['config'] = $this->db->get('konfigurasi')->result_array();
 
         $this->load->view('template/header', $data);
-        $this->load->view('template/sidebar');
-        $this->load->view('template/top_bar', $data);
         $this->load->view('configuration/index', $data);
         $this->load->view('template/footer');
     }

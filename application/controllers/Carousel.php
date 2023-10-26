@@ -20,7 +20,7 @@ class Carousel extends CI_Controller
     {
 
         // Tambah User
-        $data['admin'] = $this->user->get_user_by_email($this->session->userdata('email'));
+        $data['admin'] = $this->session->userdata('email');
         $data['carousel'] = $this->db->get('carousel')->result_array();
         $data['title'] = "Carousel";
 
@@ -31,8 +31,6 @@ class Carousel extends CI_Controller
 
 
         $this->load->view('template/header', $data);
-        $this->load->view('template/sidebar');
-        $this->load->view('template/top_bar', $data);
         $this->load->view('carousel/index', $data);
         $this->load->view('template/footer');
 

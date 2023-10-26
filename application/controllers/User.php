@@ -8,8 +8,7 @@ class User extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Activity_model', 'activity');
-
-        // isAdmin();
+        is_logged_in();
 
 
 
@@ -66,18 +65,19 @@ class User extends CI_Controller
     //     }
     // }
 
-    public function addUser(){
-    $this->db->from('user');
-        $this->db->where('email',$this->input->post('email'));
+    public function addUser()
+    {
+        $this->db->from('user');
+        $this->db->where('email', $this->input->post('email'));
         $cek = $this->db->get()->result_array();
-        if($cek<>NULL){
-        $this->session->set_flashdata('message','
+        if ($cek <> NULL) {
+            $this->session->set_flashdata('message', '
         <div class="alert alert-danger" role="alert"> Username Sudah Ada! </div>
         ');
-        redirect('user');
+            redirect('user');
         }
         $this->user->simpan();
-        $this->session->set_flashdata('message','
+        $this->session->set_flashdata('message', '
         <div class="alert alert-primary" role="alert"> Berhasil Menambahkan User! </div>
         ');
         redirect('user');
@@ -85,5 +85,5 @@ class User extends CI_Controller
     }
 
     // Edit User Modal
-    
+
 }

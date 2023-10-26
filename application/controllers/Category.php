@@ -19,13 +19,11 @@ class Category extends CI_Controller
     {
 
         // Tambah User
-        $data['admin'] = $this->user->get_user_by_email($this->session->userdata('email'));
+        $data['admin'] = $this->session->userdata('email');
         $data['category'] = $this->db->get('kategori')->result_array();
         $data['title'] = "Category";
 
         $this->load->view('template/header', $data);
-        $this->load->view('template/sidebar');
-        $this->load->view('template/top_bar', $data);
         $this->load->view('category/index', $data);
         $this->load->view('template/footer');
 
