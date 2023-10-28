@@ -7,6 +7,7 @@
     <title>Admin</title>
     <link rel="shortcut icon" type="image/png" href="<?= base_url() ?>assets/images/logos/favicon.png" />
     <link rel="stylesheet" href="<?= base_url() ?>assets/css/styles.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
 </head>
 
 <body>
@@ -19,8 +20,10 @@
             <!-- Sidebar scroll-->
             <div>
                 <div class="brand-logo d-flex align-items-center justify-content-between">
-                    <a href="./index.html" class="text-nowrap logo-img">
-                        <img src="<?= base_url() ?>assets/images/logos/dark-logo.svg" width="180" alt="" />
+                    <a href="" class="text-nowrap logo-img">
+                        <h1>
+                            Admin
+                        </h1>
                     </a>
                     <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
                         <i class="ti ti-x fs-8"></i>
@@ -110,23 +113,19 @@
         <div class="body-wrapper">
 
             <!--  Header Start -->
-            <header class="app-header">
-                <nav class="navbar navbar-expand-lg navbar-light">
+            <header class="app-header" style="background: none;">
+                <nav class="navbar navbar-expand-lg navbar-light shadow-lg m-4 rounded" style="background: white;">
                     <ul class="navbar-nav">
                         <li class="nav-item d-block d-xl-none">
-                            <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse"
-                                href="javascript:void(0)">
-                                <i class="ti ti-menu-2"></i>
-                            </a>
+                            <?= $title; ?>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link nav-icon-hover" href="javascript:void(0)">
-                                <i class="ti ti-bell-ringing"></i>
-                                <div class="notification bg-primary rounded-circle"></div>
-                            </a>
+                            <div class="nav-link">
+                                <?= $title; ?>
+                            </div>
                         </li>
                     </ul>
-                    <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
+                    <div class="navbar-collapse justify-content-end mb-2" id="navbarNav">
                         <a href="<?= base_url('auth/logout') ?>"
                             class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
                     </div>

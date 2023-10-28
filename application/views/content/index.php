@@ -8,7 +8,7 @@
     </div>
 </div>
 <!-- BEGIN: Datatable -->
-<div class="intro-y datatable-wrapper box p-5 mt-5">
+<div class="card box p-5 mt-5">
     <table class="table table-report table-report--bordered display datatable w-full" id="content_table">
         <thead>
             <tr>

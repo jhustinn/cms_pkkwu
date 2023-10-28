@@ -35,26 +35,6 @@ class Content extends CI_Controller
 
     }
 
-    // Add User Modal
-    public function addContentModal()
-    {
-        if ($this->input->is_ajax_request()) {
-            $res = [
-                'status' => 200,
-                'message' => 'Modal Fetch Successfully',
-            ];
-            echo json_encode($res);
-
-        } else {
-            $res = [
-                'status' => 404,
-                'message' => 'Failed'
-            ];
-            echo json_encode($res);
-        }
-    }
-
-
     public function addContent()
     {
         if ($this->input->is_ajax_request()) {
@@ -89,7 +69,6 @@ class Content extends CI_Controller
                 'username' => $user['name'],
             ];
 
-            $this->activity->insert('konten', 'Menambahkan data konten dengan judul : ' . $this->input->post('judul'), '', $this->input->post('judul'), date('Y-m-d H:i:s'), $user['name']);
 
             $this->db->from('konten');
             $this->db->where('judul', $this->input->post('judul'));
@@ -258,7 +237,6 @@ class Content extends CI_Controller
                 $row = $query->row(); // Get the first row
                 $judul_value = $row->judul; // Access the 'judul' property
 
-                $this->activity->insert('konten', 'Menghapus data konten dengan judul : ' . $judul_value, $judul_value, '', date('Y-m-d H:i:s'), $user['name']);
 
             } else {
                 echo 'NOOO!';

@@ -24,34 +24,27 @@ class Configuration extends CI_Controller
 
     public function addConfig()
     {
-        if ($this->input->is_ajax_request()) {
-            $id = $this->input->post('configId');
+        $id = $this->input->post('configId');
 
 
-            $update_data = [
-                'judul_website' => $this->input->post('web_title'),
-                'email' => $this->input->post('email'),
-                'alamat' => $this->input->post('address'),
-                'profil_website' => $this->input->post('web_profile'),
-                'instagram' => $this->input->post('instagram'),
-                'no_wa' => $this->input->post('wa_number')
-            ];
+        $update_data = [
+            'judul_website' => $this->input->post('web_title'),
+            'email' => $this->input->post('email'),
+            'alamat' => $this->input->post('address'),
+            'profil_website' => $this->input->post('web_profile'),
+            'instagram' => $this->input->post('instagram'),
+            'no_wa' => $this->input->post('whatapp')
+        ];
 
-            $this->db->where('id_konfigurasi', $id);
-            $query = $this->db->update('konfigurasi', $update_data);
+        $this->db->where('id_konfigurasi', $id);
+        $query = $this->db->update('konfigurasi', $update_data);
 
-            if ($query) {
-                $res = [
-                    'status' => 200,
-                    'message' => 'Configuration saved!'
-                ];
-            } else {
-                $res = [
-                    'status' => 500,
-                    'message' => 'Configruation Failed!.'
-                ];
-            }
-            echo json_encode($res);
+        if ($query) {
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Configuration Updated!</div>');
+            redirect('configuration');
+        } else {
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Failed to Update Configuration!</div>');
+            redirect('configuration');
         }
     }
 
