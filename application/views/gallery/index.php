@@ -15,9 +15,9 @@
                 <table class="table table-report table-report--bordered display datatable w-full" id="content_table">
                     <thead>
                         <tr>
-                            <th class=" whitespace-no-wrap">Title</th>
-                            <th class=" whitespace-no-wrap">Photo</th>
-                            <th class=" text-center whitespace-no-wrap">Actions</th>
+                            <th class="whitespace-no-wrap">Title</th>
+                            <th class="whitespace-no-wrap">Photo</th>
+                            <th class="text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -34,27 +34,71 @@
                                     </a>
                                     <!-- <img src="" alt="Content Photo"> -->
                                 </td>
-                                <td class="w-5">
-                                    <div class="flex justify-content-center items-center">
-                                        <a class="flex items-center mr-3 editContentBtn" value="<?= $c['foto']; ?>"> <i
-                                                data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-
-                                        <a class="flex items-center text-theme-6 deleteContentBtn"
-                                            value="<?= $c['foto']; ?>">
-                                            <i data-feather="trash-2" class="w-4 h-4 mr-1"></i>
-                                            Delete </a>
+                                <td>
+                                    <div class="flex justify-content-center items-center text-center">
+                                        <button type="button"
+                                            class="btn btn-light-warning text-warning btn-lg px-4 fs-4 font-medium"
+                                            data-bs-toggle="modal" data-bs-target="#vertical-center-modal<?= $c['foto'] ?>">
+                                            Edit
+                                        </button>
+                                        <button type="button"
+                                            class="btn btn-light-danger text-danger btn-lg px-4 fs-4 font-medium"
+                                            data-bs-toggle="modal" data-bs-target="#delete-modal">
+                                            Delete
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
-                        </tbody>
-                    </table>
-                </div>
-                </form>
-            <?php endforeach; ?>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+            </form>
         </div>
     </div>
 </div>
 </div>
+
+<?php foreach ($gallery as $g): ?>
+    <div class="modal fade" id="vertical-center-modal<?= $g['foto'] ?>" tabindex="-1"
+        aria-labelledby="vertical-center-modal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header d-flex align-items-center">
+                    <h4 class="modal-title" id="myLargeModalLabel">
+                        Edit
+                    </h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="card-body p-4">
+                        <form action="<?= base_url('gallery/editPhoto') ?>" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="id" value="<?= $g['foto'] ?>">
+                            <div class="mb-4">
+                                <label for="exampleInputPassword1" class="form-label fw-semibold">Title</label>
+                                <input required type="text" name="title" class="form-control" value="<?= $g['judul'] ?>"
+                                    placeholder="Photo Title">
+                            </div>
+                            <div class="mb-4">
+                                <label for="exampleInputPassword1" class="form-label fw-semibold">Photo</label>
+                                <input type="file" name="edit" class="form-control" value="<?= $g['foto'] ?>">
+                            </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-light-success text-success font-medium waves-effect text-start">
+                        Save
+                    </button>
+                    <button type="button" class="btn btn-light-danger text-danger font-medium waves-effect text-start"
+                        data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
 
 <div class="modal fade" id="vertical-center-modal" tabindex="-1" aria-labelledby="vertical-center-modal"
     aria-hidden="true">
@@ -62,7 +106,7 @@
         <div class="modal-content">
             <div class="modal-header d-flex align-items-center">
                 <h4 class="modal-title" id="myLargeModalLabel">
-                    Vertically centered Modal
+                    Add Photo
                 </h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>

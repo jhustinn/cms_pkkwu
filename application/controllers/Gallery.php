@@ -68,4 +68,77 @@ class Gallery extends CI_Controller
         }
     }
 
+    public function editPhoto()
+    {
+        $id = $this->input->post('id');
+
+        $title = $this->input->post('title');
+
+        $upload_image = $_FILES['edit']['name'];
+
+        if ($upload_image) {
+            date_default_timezone_set("Asia/Jakarta");
+            $namaFoto = date('YmdHis') . '.jpg';
+            $config['upload_path'] = 'assets/images/galeri/';
+            $config['max_size'] = 500 * 1024; //3 * 1024 * 1024; //3Mb; 0=unlimited
+            $config['allowed_types'] = '*';
+            $config['overwrite'] = TRUE;
+            $config['file_name'] = $namaFoto;
+
+            $this->load->library('upload', $config);
+
+            if ($this->upload->do_upload('editImage')) {
+                $new_image = $namaFoto;
+                // $filename = FCPATH . '/assets/images/konten/' . $old_image;
+                $filename = FCPATH . '/assets/images/faleri/' . $id;
+                if (file_exists($filename)) {
+                    unlink("./assets/images/galeri/" . $id);
+                }
+                $this->db->set('foto', $new_image);
+            } else {
+                echo $this->upload->display_errors();
+            }
+        }
+
+
+
+        $update_data = [
+            'judul' => $title,
+            'foto' => $new_image,
+        ];
+
+
+        $this->db->where('foto', $id);
+        $query = $this->db->update('gallery', $update_data);
+
+
+
+        if ($query) {
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Photo Edited!</div>');
+            redirect('gallery');
+        } else {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Failed to edit Photo!</div>');
+            redirect('gallery');
+        }
+    }
+
+    public function deletePhoto($id)
+    {
+        $id = $this->input->post('id');
+        unlink("./assets/images/galeri/" . $id);
+
+        $this->db->where('foto', $id);
+        $query = $this->db->delete('gallery');
+
+
+
+        if ($query) {
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Photo Deleted!</div>');
+            redirect('gallery');
+        } else {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Failed to delete Photo!</div>');
+            redirect('gallery');
+        }
+    }
+
 }
