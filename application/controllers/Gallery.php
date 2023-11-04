@@ -31,10 +31,11 @@ class Gallery extends CI_Controller
         $config['overwrite'] = TRUE;
         $config['file_name'] = $namaFoto;
         $this->load->library('upload', $config);
-        if ($_FILES['foto']['size'] >= 500 * 1024) {
-            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">File size is too big!</div>');
-            redirect('gallery');
-        } elseif (!$this->upload->do_upload('foto')) {
+        // if ($_FILES['foto']['size'] >= 500 * 1024) {
+        // $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">File size is too big!</div>');
+        // redirect('gallery');
+        // } else
+        if (!$this->upload->do_upload('foto')) {
             echo $this->upload->display_errors();
         } else {
             $data = array('upload_data' => $this->upload->data());
@@ -71,16 +72,14 @@ class Gallery extends CI_Controller
     public function editPhoto()
     {
         $id = $this->input->post('id');
-
         $title = $this->input->post('title');
-
-        $upload_image = $_FILES['edit']['name'];
+        $upload_image = $_FILES['editImage']['name'];
 
         if ($upload_image) {
             date_default_timezone_set("Asia/Jakarta");
             $namaFoto = date('YmdHis') . '.jpg';
             $config['upload_path'] = 'assets/images/galeri/';
-            $config['max_size'] = 500 * 1024; //3 * 1024 * 1024; //3Mb; 0=unlimited
+            $config['max_size'] = 500 * 1024; // 500KB
             $config['allowed_types'] = '*';
             $config['overwrite'] = TRUE;
             $config['file_name'] = $namaFoto;
@@ -89,29 +88,25 @@ class Gallery extends CI_Controller
 
             if ($this->upload->do_upload('editImage')) {
                 $new_image = $namaFoto;
-                // $filename = FCPATH . '/assets/images/konten/' . $old_image;
-                $filename = FCPATH . '/assets/images/faleri/' . $id;
+                $filename = FCPATH . '/assets/images/galeri/' . $id;
                 if (file_exists($filename)) {
-                    unlink("./assets/images/galeri/" . $id);
+                    unlink($filename);
                 }
-                $this->db->set('foto', $new_image);
             } else {
                 echo $this->upload->display_errors();
             }
+        } else {
+            // Jika pengguna tidak mengunggah gambar baru, gunakan nama file yang ada
+            $new_image = $id;
         }
-
-
 
         $update_data = [
             'judul' => $title,
             'foto' => $new_image,
         ];
 
-
-        $this->db->where('foto', $id);
+        $this->db->where('id', $id); // Ubah kondisi sesuai dengan struktur tabel Anda
         $query = $this->db->update('gallery', $update_data);
-
-
 
         if ($query) {
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Photo Edited!</div>');
@@ -122,9 +117,9 @@ class Gallery extends CI_Controller
         }
     }
 
+
     public function deletePhoto($id)
     {
-        $id = $this->input->post('id');
         unlink("./assets/images/galeri/" . $id);
 
         $this->db->where('foto', $id);
