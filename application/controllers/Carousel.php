@@ -9,7 +9,6 @@ class Carousel extends CI_Controller
 
         is_logged_in();
         $this->load->library('form_validation');
-        $this->load->model('Activity_model', 'activity');
         $this->load->model('Content_model', 'content');
         $this->load->model('Carousel_model', 'carousel');
         $this->load->model('User_model', 'user');
@@ -90,7 +89,6 @@ class Carousel extends CI_Controller
                 'username' => $user['name'],
             ];
 
-            $this->activity->insert('konten', 'Menambahkan data konten dengan judul : ' . $this->input->post('judul'), '', $this->input->post('judul'), date('Y-m-d H:i:s'), $user['name']);
 
             $this->db->from('konten');
             $this->db->where('judul', $this->input->post('judul'));
