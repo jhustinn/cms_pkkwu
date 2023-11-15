@@ -46,25 +46,6 @@ class User extends CI_Controller
 
     }
 
-    // Add User Modal
-    // public function addUserModal()
-    // {
-    //     if ($this->input->is_ajax_request()) {
-    //         $res = [
-    //             'status' => 200,
-    //             'message' => 'User Fetch Successfully',
-    //         ];
-    //         echo json_encode($res);
-
-    //     } else {
-    //         $res = [
-    //             'status' => 404,
-    //             'message' => 'Failed'
-    //         ];
-    //         echo json_encode($res);
-    //     }
-    // }
-
     public function addUser()
     {
         $this->db->from('user');

@@ -37,191 +37,127 @@ class Content extends CI_Controller
 
     public function addContent()
     {
-        if ($this->input->is_ajax_request()) {
-            date_default_timezone_set("Asia/Jakarta");
-            $namaFoto = date('YmdHis') . '.jpg';
-            $config['upload_path'] = 'assets/images/konten/';
-            $config['max_size'] = 500 * 1024; //3 * 1024 * 1024; //3Mb; 0=unlimited
-            $config['allowed_types'] = '*';
-            $config['overwrite'] = TRUE;
-            $config['file_name'] = $namaFoto;
-            $this->load->library('upload', $config);
-            if ($_FILES['foto']['size'] >= 500 * 1024) {
-                $res = [
-                    'status' => 422,
-                    'message' => 'File size is too big!',
-                ];
-            } elseif (!$this->upload->do_upload('foto')) {
-                $error = array('error' => $this->upload->display_errors());
+        date_default_timezone_set("Asia/Jakarta");
+        $namaFoto = date('YmdHis') . '.jpg';
+        $config['upload_path'] = 'assets/images/konten/';
+        $config['max_size'] = 500 * 1024; //3 * 1024 * 1024; //3Mb; 0=unlimited
+        $config['allowed_types'] = '*';
+        $config['overwrite'] = TRUE;
+        $config['file_name'] = $namaFoto;
+        $this->load->library('upload', $config);
+        if ($_FILES['foto']['size'] >= 500 * 1024) {
+            $this->session->set_flashdata('message', '
+        <div class="alert alert-primary" role="alert"> File size is too big! </div>
+        ');
+            redirect('content');
+        } elseif (!$this->upload->do_upload('foto')) {
+            $error = array('error' => $this->upload->display_errors());
+        } else {
+            $data = array('upload_data' => $this->upload->data());
+        }
+
+
+        $user = $this->user->get_user_by_email($this->session->userdata('email'));
+        $data = [
+            'judul' => $this->input->post('judul'),
+            'keterangan' => $this->input->post('keterangan'),
+            'foto' => $namaFoto,
+            'id_kategori' => $this->input->post('kategori'),
+            'slug' => str_replace(' ', '-', $this->input->post('judul')),
+            'tanggal' => date('Y:m:d'),
+            'username' => $user['name'],
+        ];
+
+
+        $this->db->from('konten');
+        $this->db->where('judul', $this->input->post('judul'));
+        $cek = $this->db->get()->result_array();
+
+        if ($cek <> NULL) {
+            $this->session->set_flashdata('message', '
+        <div class="alert alert-primary" role="alert"> Title elready exist! </div>
+        ');
+            redirect('content');
+        } else {
+            $query = $this->db->insert('konten', $data);
+            $this->upload->do_upload('foto');
+            if ($query) {
+
+                $this->session->set_flashdata('message', '
+        <div class="alert alert-primary" role="alert"> Content added! </div>
+        ');
+                redirect('content');
             } else {
-                $data = array('upload_data' => $this->upload->data());
+                $this->session->set_flashdata('message', '
+        <div class="alert alert-primary" role="alert"> Failed to add content! </div>
+        ');
+                redirect('content');
             }
-
-
-            $user = $this->user->get_user_by_email($this->session->userdata('email'));
-            $data = [
-                'judul' => $this->input->post('judul'),
-                'keterangan' => $this->input->post('keterangan'),
-                'foto' => $namaFoto,
-                'id_kategori' => $this->input->post('kategori'),
-                'slug' => str_replace(' ', '-', $this->input->post('judul')),
-                'tanggal' => date('Y:m:d'),
-                'username' => $user['name'],
-            ];
-
-
-            $this->db->from('konten');
-            $this->db->where('judul', $this->input->post('judul'));
-            $cek = $this->db->get()->result_array();
-
-            if ($cek <> NULL) {
-                $res = [
-                    'status' => 422,
-                    'message' => 'Title elready exist!',
-                ];
-            } else {
-                $query = $this->db->insert('konten', $data);
-                $this->upload->do_upload('foto');
-                if ($query) {
-
-                    $res = [
-                        'status' => 200,
-                        'message' => 'Content added!'
-                    ];
-                } else {
-                    $res = [
-                        'status' => 500,
-                        'message' => 'Failed to add content!.'
-                    ];
-                }
-            }
-            echo json_encode($res);
         }
     }
 
-
-    // Edit User Modal
-    public function editContentModal($id)
+    // Edit
+    public function editPhoto()
     {
-        if ($this->input->is_ajax_request()) {
 
-            $id = $this->db->escape_str($id);
-
-            $query = $this->db->get_where('konten', ['foto' => $id], 1);
-
-            if ($query->num_rows() == 1) {
-
-                $content = $query->row_array();
-
-                $res = [
-                    'status' => 200,
-                    'message' => 'Content Fetch Successfully',
-                    'data' => $content
-                ];
-                echo json_encode($res);
-            } else {
-                $res = [
-                    'status' => 404,
-                    'message' => 'Content ID Not Found'
-                ];
-                echo json_encode($res);
-            }
-        }
     }
+
 
     // Edit User
     public function editContent()
     {
-        if ($this->input->is_ajax_request()) {
-            $id = $this->input->post('id_edit_image');
-            $id_konten = $this->input->post('id_edit_content');
+        $id = $this->input->post('id');
+        $title = $this->input->post('judul');
+        $description = $this->input->post('keterangan');
+        $category = $this->input->post('edit_category');
+        $upload_image = $_FILES['editImage']['name'];
 
-            $title = $this->input->post('edit_title');
-            $description = $this->input->post('edit_description');
-            $category = $this->input->post('edit_category');
+        if ($upload_image) {
+            date_default_timezone_set("Asia/Jakarta");
+            $namaFoto = date('YmdHis') . '.jpg';
+            $config['upload_path'] = 'assets/images/konten/';
+            $config['max_size'] = 500 * 1024; // 500KB
+            $config['allowed_types'] = '*';
+            $config['overwrite'] = TRUE;
+            $config['file_name'] = $namaFoto;
 
-            $upload_image = $_FILES['editImage']['name'];
+            $this->load->library('upload', $config);
 
-            if ($upload_image) {
-                date_default_timezone_set("Asia/Jakarta");
-                $namaFoto = date('YmdHis') . '.jpg';
-                $config['upload_path'] = 'assets/images/konten/';
-                $config['max_size'] = 500 * 1024; //3 * 1024 * 1024; //3Mb; 0=unlimited
-                $config['allowed_types'] = '*';
-                $config['overwrite'] = TRUE;
-                $config['file_name'] = $namaFoto;
-
-                $this->load->library('upload', $config);
-
-                if ($this->upload->do_upload('editImage')) {
-                    $new_image = $namaFoto;
-                    // $filename = FCPATH . '/assets/images/konten/' . $old_image;
-                    $filename = FCPATH . '/assets/images/konten/' . $id;
-                    if (file_exists($filename)) {
-                        unlink("./assets/images/konten/" . $id);
-                    }
-                    $this->db->set('foto', $new_image);
-                } else {
-                    echo $this->upload->display_errors();
+            if ($this->upload->do_upload('editImage')) {
+                $new_image = $namaFoto;
+                $filename = FCPATH . '/assets/images/konten/' . $id;
+                if (file_exists($filename)) {
+                    unlink($filename);
                 }
-            }
-
-
-
-            $update_data = [
-                'judul' => $title,
-                'foto' => $namaFoto,
-                'keterangan' => $description,
-                'id_kategori' => $category,
-            ];
-
-
-            $this->db->where('id_konten', $id_konten);
-            $query = $this->db->update('konten', $update_data);
-
-
-
-            if ($query) {
-                $res = [
-                    'status' => 200,
-                    'message' => 'Content edited!'
-                ];
             } else {
-                $res = [
-                    'status' => 500,
-                    'message' => 'Failed to edit content!.'
-                ];
+                echo $this->upload->display_errors();
             }
-            echo json_encode($res);
+        } else {
+            // Jika pengguna tidak mengunggah gambar baru, gunakan nama file yang ada
+            $new_image = $id;
+        }
+
+
+        $update_data = [
+            'judul' => $title,
+            'foto' => $new_image,
+            'keterangan' => $description,
+            'id_kategori' => $category,
+        ];
+
+        $this->db->where('foto', $id);
+        $query = $this->db->update('konten', $update_data);
+
+        if ($query) {
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Content Edited!</div>');
+            redirect('content');
+        } else {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Failed to edit Content!</div>');
+            redirect('content');
         }
     }
 
 
-    public function deleteContentModal($id)
-    {
-        if ($this->input->is_ajax_request()) {
-            $id = $this->db->escape_str($id);
-
-            $query = $this->db->get_where('konten', ['foto' => $id]);
-
-            if ($query->num_rows() == 1) {
-                $content = $query->row_array();
-
-                $res = [
-                    'status' => 200,
-                    'message' => 'Content Fetch Successfully',
-                    'data' => $content
-                ];
-                echo json_encode($res);
-            } else {
-                $res = [
-                    'status' => 404,
-                    'message' => 'Content ID Not Found'
-                ];
-                echo json_encode($res);
-            }
-        }
-    }
     public function deleteContent()
     {
         if ($this->input->is_ajax_request()) {
