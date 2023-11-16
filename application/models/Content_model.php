@@ -10,8 +10,9 @@ class Content_model extends CI_Model
 
     public function getContent()
     {
-
-        return $this->db->get('konten')->result_array();
+        $this->db->from('konten a');
+        $this->db->join('kategori b', 'a.id_kategori = b.id_kategori', 'left');
+        return $this->db->get()->result_array();
 
     }
     public function getContentFotoId($id)

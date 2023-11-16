@@ -10,7 +10,7 @@
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
-    <title>Blogs | Boldo Agency Template</title>
+    <title><?= $config[0]['judul_website'] ?></title>
 
 
     <!-- ===============================================-->
@@ -19,10 +19,7 @@
     <link rel="apple-touch-icon" sizes="180x180"
         href="<?= base_url('vendor/boldo-1.0.0/public/') ?>assets/img/favicons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32"
-        href="<?= base_url('vendor/boldo-1.0.0/public/') ?>assets/img/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16"
-        href="<?= base_url('vendor/boldo-1.0.0/public/') ?>assets/img/favicons/favicon-16x16.png">
-    <link rel="shortcut icon" type="image/x-icon"
+    href="<?= base_url('assets/images/logos/rex.png') ?>">
         href="<?= base_url('vendor/boldo-1.0.0/public/') ?>assets/img/favicons/favicon.ico">
     <link rel="manifest" href="<?= base_url('vendor/boldo-1.0.0/public/') ?>assets/img/favicons/manifest.json">
     <meta name="msapplication-TileImage" content="assets/img/favicons/mstile-150x150.png">
@@ -52,7 +49,8 @@
         <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark"
             data-navbar-on-scroll="data-navbar-on-scroll">
             <div class="container"><a class="navbar-brand" href="index.html"><img
-                        src="<?= base_url('vendor/boldo-1.0.0/public/') ?>assets/img/Logo.png" alt="" /></a>
+                        src="<?= base_url('assets/images/logos/rex.png') ?>" width="85px" height="75px" style="filter:drop-shadow(0px 0px 30px black);" alt="" /></a>
+                        <h1 class="text-white fw-normal"><?= $config[0]['judul_website'] ?></h1>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation"><i

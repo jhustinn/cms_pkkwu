@@ -55,263 +55,120 @@ class Carousel extends CI_Controller
     }
 
 
-    public function addContent()
+    public function addPhoto()
     {
-        if ($this->input->is_ajax_request()) {
-            date_default_timezone_set("Asia/Jakarta");
-            $namaFoto = date('YmdHis') . '.jpg';
-            $config['upload_path'] = 'assets/images/konten/';
-            $config['max_size'] = 500 * 1024; //3 * 1024 * 1024; //3Mb; 0=unlimited
-            $config['allowed_types'] = '*';
-            $config['overwrite'] = TRUE;
-            $config['file_name'] = $namaFoto;
-            $this->load->library('upload', $config);
-            if ($_FILES['foto']['size'] >= 500 * 1024) {
-                $res = [
-                    'status' => 422,
-                    'message' => 'File size is too big!',
-                ];
-            } elseif (!$this->upload->do_upload('foto')) {
-                $error = array('error' => $this->upload->display_errors());
+        date_default_timezone_set("Asia/Jakarta");
+        $namaFoto = date('YmdHis') . '.jpg';
+        $config['upload_path'] = 'assets/images/carousel/';
+        $config['max_size'] = 500 * 1024; //3 * 1024 * 1024; //3Mb; 0=unlimited
+        $config['allowed_types'] = '*';
+        $config['overwrite'] = TRUE;
+        $config['file_name'] = $namaFoto;
+        $this->load->library('upload', $config);
+        // if ($_FILES['foto']['size'] >= 500 * 1024) {
+        // $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">File size is too big!</div>');
+        // redirect('carousel');
+        // } else
+        if (!$this->upload->do_upload('foto')) {
+            echo $this->upload->display_errors();
+        } else {
+            $data = array('upload_data' => $this->upload->data());
+        }
+
+
+        $data = [
+            'judul' => $this->input->post('title'),
+            'foto' => $namaFoto,
+        ];
+
+
+        $this->db->from('carousel');
+        $this->db->where('judul', $this->input->post('judul'));
+        $cek = $this->db->get()->result_array();
+
+        if ($cek <> NULL) {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Title Already Exist!</div>');
+            redirect('carousel');
+        } else {
+            $query = $this->db->insert('carousel', $data);
+            $this->upload->do_upload('foto');
+            if ($query) {
+
+                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Photo Added!</div>');
+                redirect('carousel');
             } else {
-                $data = array('upload_data' => $this->upload->data());
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Failed to add Photo!</div>');
+                redirect('carousel');
             }
-
-
-            $user = $this->user->get_user_by_email($this->session->userdata('email'));
-            $data = [
-                'judul' => $this->input->post('judul'),
-                'keterangan' => $this->input->post('keterangan'),
-                'foto' => $namaFoto,
-                'id_kategori' => $this->input->post('kategori'),
-                'slug' => str_replace(' ', '-', $this->input->post('judul')),
-                'tanggal' => date('Y:m:d'),
-                'username' => $user['name'],
-            ];
-
-
-            $this->db->from('konten');
-            $this->db->where('judul', $this->input->post('judul'));
-            $cek = $this->db->get()->result_array();
-
-            if ($cek <> NULL) {
-                $res = [
-                    'status' => 422,
-                    'message' => 'Title elready exist!',
-                ];
-            } else {
-                $query = $this->db->insert('konten', $data);
-                $this->upload->do_upload('foto');
-                if ($query) {
-
-                    $res = [
-                        'status' => 200,
-                        'message' => 'Content added!'
-                    ];
-                } else {
-                    $res = [
-                        'status' => 500,
-                        'message' => 'Failed to add content!.'
-                    ];
-                }
-            }
-            echo json_encode($res);
         }
     }
 
 
     // Edit User Modal
-    public function editContentModal($id)
+    public function editPhoto()
     {
-        if ($this->input->is_ajax_request()) {
+        $id = $this->input->post('id');
+        $title = $this->input->post('title');
+        $upload_image = $_FILES['editImage']['name'];
 
-            $id = $this->db->escape_str($id);
+        if ($upload_image) {
+            date_default_timezone_set("Asia/Jakarta");
+            $namaFoto = date('YmdHis') . '.jpg';
+            $config['upload_path'] = 'assets/images/carousel/';
+            $config['max_size'] = 500 * 1024; // 500KB
+            $config['allowed_types'] = '*';
+            $config['overwrite'] = TRUE;
+            $config['file_name'] = $namaFoto;
 
-            $query = $this->db->get_where('konten', ['foto' => $id], 1);
+            $this->load->library('upload', $config);
 
-            if ($query->num_rows() == 1) {
-
-                $content = $query->row_array();
-
-                $res = [
-                    'status' => 200,
-                    'message' => 'Content Fetch Successfully',
-                    'data' => $content
-                ];
-                echo json_encode($res);
-            } else {
-                $res = [
-                    'status' => 404,
-                    'message' => 'Content ID Not Found'
-                ];
-                echo json_encode($res);
-            }
-        }
-    }
-
-    // Edit User
-    public function editContent()
-    {
-        if ($this->input->is_ajax_request()) {
-            $id = $this->input->post('id_edit_image');
-            $id_konten = $this->input->post('id_edit_content');
-
-            $title = $this->input->post('edit_title');
-            $description = $this->input->post('edit_description');
-            $category = $this->input->post('edit_category');
-
-            $upload_image = $_FILES['editImage']['name'];
-
-            if ($upload_image) {
-                date_default_timezone_set("Asia/Jakarta");
-                $namaFoto = date('YmdHis') . '.jpg';
-                $config['upload_path'] = 'assets/images/konten/';
-                $config['max_size'] = 500 * 1024; //3 * 1024 * 1024; //3Mb; 0=unlimited
-                $config['allowed_types'] = '*';
-                $config['overwrite'] = TRUE;
-                $config['file_name'] = $namaFoto;
-
-                $this->load->library('upload', $config);
-
-                if ($this->upload->do_upload('editImage')) {
-                    $new_image = $namaFoto;
-                    // $filename = FCPATH . '/assets/images/konten/' . $old_image;
-                    $filename = FCPATH . '/assets/images/konten/' . $id;
-                    if (file_exists($filename)) {
-                        unlink("./assets/images/konten/" . $id);
-                    }
-                    $this->db->set('foto', $new_image);
-                } else {
-                    echo $this->upload->display_errors();
+            if ($this->upload->do_upload('editImage')) {
+                $new_image = $namaFoto;
+                $filename = FCPATH . '/assets/images/carousel/' . $id;
+                if (file_exists($filename)) {
+                    unlink($filename);
                 }
-            }
-
-
-
-            $update_data = [
-                'judul' => $title,
-                'foto' => $namaFoto,
-                'keterangan' => $description,
-                'id_kategori' => $category,
-            ];
-
-
-            $this->db->where('id_konten', $id_konten);
-            $query = $this->db->update('konten', $update_data);
-
-
-
-            if ($query) {
-                $res = [
-                    'status' => 200,
-                    'message' => 'Content edited!'
-                ];
             } else {
-                $res = [
-                    'status' => 500,
-                    'message' => 'Failed to edit content!.'
-                ];
+                echo $this->upload->display_errors();
             }
-            echo json_encode($res);
+        } else {
+            // Jika pengguna tidak mengunggah gambar baru, gunakan nama file yang ada
+            $new_image = $id;
+        }
+
+        $update_data = [
+            'judul' => $title,
+            'foto' => $new_image,
+        ];
+
+        $this->db->where('foto', $id); // Ubah kondisi sesuai dengan struktur tabel Anda
+        $query = $this->db->update('carousel', $update_data);
+
+        if ($query) {
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Photo Edited!</div>');
+            redirect('carousel');
+        } else {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Failed to edit Photo!</div>');
+            redirect('carousel');
         }
     }
 
 
-    public function deleteContentModal($id)
+    public function deletePhoto($id)
     {
-        if ($this->input->is_ajax_request()) {
-            $id = $this->db->escape_str($id);
+        unlink("./assets/images/carousel/" . $id);
 
-            $query = $this->db->get_where('konten', ['foto' => $id]);
-
-            if ($query->num_rows() == 1) {
-                $content = $query->row_array();
-
-                $res = [
-                    'status' => 200,
-                    'message' => 'Content Fetch Successfully',
-                    'data' => $content
-                ];
-                echo json_encode($res);
-            } else {
-                $res = [
-                    'status' => 404,
-                    'message' => 'Content ID Not Found'
-                ];
-                echo json_encode($res);
-            }
-        }
-    }
-    public function deleteContent()
-    {
-        if ($this->input->is_ajax_request()) {
-            $user = $this->user->get_user_by_email($this->session->userdata('email'));
-            $id = $this->input->post('id');
-            // $filename = FCPATH . '/assets/images/konten/' . $id;
-            // if (file_exists($filename)) {
-            unlink("./assets/images/konten/" . $id);
-            // }
-
-            $query = $this->db->get_where('konten', ['foto' => $id]);
-            if ($query->num_rows() > 0) {
-                $row = $query->row(); // Get the first row
-                $judul_value = $row->judul; // Access the 'judul' property
-
-                $this->activity->insert('konten', 'Menghapus data konten dengan judul : ' . $judul_value, $judul_value, '', date('Y-m-d H:i:s'), $user['name']);
-
-            } else {
-                echo 'NOOO!';
-            }
+        $this->db->where('foto', $id);
+        $query = $this->db->delete('carousel');
 
 
 
-
-            $this->db->where('foto', $id);
-            $query = $this->db->delete('konten');
-
-
-
-            if ($query) {
-                $res = [
-                    'status' => 200,
-                    'message' => 'Content deleted!.'
-                ];
-            } else {
-                $res = [
-                    'status' => 500,
-                    'message' => 'Failed to delete content!.'
-                ];
-            }
-
-            echo json_encode($res);
-        }
-    }
-
-    public function viewImage($id)
-    {
-        if ($this->input->is_ajax_request()) {
-
-            $id = $this->db->escape_str($id);
-
-            $query = $this->db->get_where('konten', ['foto' => $id], 1);
-
-            if ($query->num_rows() == 1) {
-
-                $image = $query->row_array();
-
-                $res = [
-                    'status' => 200,
-                    'message' => 'Content Fetch Successfully',
-                    'data' => $image
-                ];
-                echo json_encode($res);
-            } else {
-                $res = [
-                    'status' => 404,
-                    'message' => 'Content ID Not Found!'
-                ];
-                echo json_encode($res);
-            }
+        if ($query) {
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Photo Deleted!</div>');
+            redirect('carousel');
+        } else {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Failed to delete Photo!</div>');
+            redirect('carousel');
         }
     }
 

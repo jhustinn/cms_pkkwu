@@ -9,7 +9,6 @@ class Content extends CI_Controller
 
         is_logged_in();
         $this->load->library('form_validation');
-        $this->load->model('Activity_model', 'activity');
         $this->load->model('Content_model', 'content');
         $this->load->model('User_model', 'user');
 
@@ -109,7 +108,7 @@ class Content extends CI_Controller
         $id = $this->input->post('id');
         $title = $this->input->post('judul');
         $description = $this->input->post('keterangan');
-        $category = $this->input->post('edit_category');
+        $category = $this->input->post('kategori');
         $upload_image = $_FILES['editImage']['name'];
 
         if ($upload_image) {
@@ -158,76 +157,21 @@ class Content extends CI_Controller
     }
 
 
-    public function deleteContent()
+    public function deletePhoto($id)
     {
-        if ($this->input->is_ajax_request()) {
-            $user = $this->user->get_user_by_email($this->session->userdata('email'));
-            $id = $this->input->post('id');
-            // $filename = FCPATH . '/assets/images/konten/' . $id;
-            // if (file_exists($filename)) {
-            unlink("./assets/images/konten/" . $id);
-            // }
+        unlink("./assets/images/konten/" . $id);
 
-            $query = $this->db->get_where('konten', ['foto' => $id]);
-            if ($query->num_rows() > 0) {
-                $row = $query->row(); // Get the first row
-                $judul_value = $row->judul; // Access the 'judul' property
-
-
-            } else {
-                echo 'NOOO!';
-            }
+        $this->db->where('foto', $id);
+        $query = $this->db->delete('konten');
 
 
 
-
-            $this->db->where('foto', $id);
-            $query = $this->db->delete('konten');
-
-
-
-            if ($query) {
-                $res = [
-                    'status' => 200,
-                    'message' => 'Content deleted!.'
-                ];
-            } else {
-                $res = [
-                    'status' => 500,
-                    'message' => 'Failed to delete content!.'
-                ];
-            }
-
-            echo json_encode($res);
+        if ($query) {
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Photo Deleted!</div>');
+            redirect('content');
+        } else {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Failed to delete Photo!</div>');
+            redirect('content');
         }
     }
-
-    public function viewImage($id)
-    {
-        if ($this->input->is_ajax_request()) {
-
-            $id = $this->db->escape_str($id);
-
-            $query = $this->db->get_where('konten', ['foto' => $id], 1);
-
-            if ($query->num_rows() == 1) {
-
-                $image = $query->row_array();
-
-                $res = [
-                    'status' => 200,
-                    'message' => 'Content Fetch Successfully',
-                    'data' => $image
-                ];
-                echo json_encode($res);
-            } else {
-                $res = [
-                    'status' => 404,
-                    'message' => 'Content ID Not Found!'
-                ];
-                echo json_encode($res);
-            }
-        }
-    }
-
 }

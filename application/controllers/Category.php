@@ -10,7 +10,6 @@ class Category extends CI_Controller
         is_logged_in();
         $this->load->library('form_validation');
         $this->load->model('User_model', 'user');
-        $this->load->model('Activity_model', 'activity');
 
 
     }

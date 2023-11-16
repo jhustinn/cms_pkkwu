@@ -8,12 +8,12 @@ class Carousel_model extends CI_Model
         parent::__construct();
     }
 
-    // public function getContentByCategory()
-    // {
+    public function getCarousel()
+    {
 
-    //     return $this->db->get('kategori')->result_array();
+        return $this->db->get('carousel')->result_array();
 
 
-    // }
+    }
 
 }

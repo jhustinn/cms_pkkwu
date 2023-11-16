@@ -1,16 +1,18 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Category_model extends CI_Model
+class Gallery_model extends CI_Model
 {
     public function __construct()
     {
         parent::__construct();
     }
 
-    public function getCategory()
+    public function getGaleri()
     {
-        return $this->db->get('kategori')->result_array();
+
+        return $this->db->get('gallery')->result_array();
+
     }
 
 }

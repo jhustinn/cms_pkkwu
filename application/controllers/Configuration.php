@@ -33,7 +33,7 @@ class Configuration extends CI_Controller
             'alamat' => $this->input->post('address'),
             'profil_website' => $this->input->post('web_profile'),
             'instagram' => $this->input->post('instagram'),
-            'no_wa' => $this->input->post('whatapp')
+            'no_wa' => $this->input->post('whatsapp')
         ];
 
         $this->db->where('id_konfigurasi', $id);
