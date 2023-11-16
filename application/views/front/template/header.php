@@ -16,12 +16,8 @@
     <!-- ===============================================-->
     <!--    Favicons-->
     <!-- ===============================================-->
-    <link rel="apple-touch-icon" sizes="180x180"
-        href="<?= base_url('vendor/boldo-1.0.0/public/') ?>assets/img/favicons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32"
     href="<?= base_url('assets/images/logos/rex.png') ?>">
-        href="<?= base_url('vendor/boldo-1.0.0/public/') ?>assets/img/favicons/favicon.ico">
-    <link rel="manifest" href="<?= base_url('vendor/boldo-1.0.0/public/') ?>assets/img/favicons/manifest.json">
     <meta name="msapplication-TileImage" content="assets/img/favicons/mstile-150x150.png">
     <meta name="theme-color" content="#ffffff">
 
@@ -57,9 +53,9 @@
                         class="fa-solid fa-bars text-white fs-3"></i></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-                        <li class="nav-item"><a class="nav-link" aria-current="page" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" aria-current="page" href="<?= base_url('home') ?>">Home</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="<?= base_url('blog'); ?>">Blogs</a>
                         <li class="nav-item"><a class="nav-link" aria-current="page" href="about.html">About</a></li>
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="blogs.html">Blogs</a>
                         </li>
                         <li class="nav-item mt-2 mt-lg-0"><a
                                 class="nav-link btn btn-light text-black w-md-25 w-50 w-lg-100" aria-current="page"
