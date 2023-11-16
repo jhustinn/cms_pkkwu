@@ -4,30 +4,34 @@
 
     <div class="container">
         <div class="border-bottom border-dark py-7">
-            <p class="text-dark text-center fs-1">Blog</p>
-            <h1 class="text-center fs-lg-7 fs-md-4 fs-3 text-dark mb-5">Thoughts and words</h1>
-            <div class="row align-items-center gx-xl-7">
-                <div class="col-lg-6 text-center"><a href="#"><img class="img-fluid"
-                            src="<?= base_url('vendor/boldo-1.0.0/public/') ?>assets/img/blog/blog-hero.png"
-                            alt="" /></a></div>
-                <div class="col-lg-6 mt-5 mt-lg-0 text-center text-lg-start">
-                    <div class="d-flex align-items-center justify-content-center justify-content-lg-start gap-3"><a
-                            href="#">
-                            <p class="fw-bold mb-0 text-black">Category</p>
-                        </a>
-                        <p class="mb-0">November 22, 2021</p>
-                    </div><a href="#">
-                        <h1 class="fs-xl-6 fs-md-4 fs-3 my-3">Pitch termsheet backing validation focus release.</h1>
-                    </a>
-                    <div class="d-flex align-items-center justify-content-center justify-content-lg-start gap-2"><img
-                            class="img-fluid"
-                            src="<?= base_url('vendor/boldo-1.0.0/public/') ?>assets/img/blog/profile1.png" alt="" /><a
-                            href="#">
-                            <p class="mb-0">Chandler Bing</p>
-                        </a></div>
+            <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <?php $no = 1;
+                    foreach ($carousel as $c): ?>
+                                    <div class="carousel-item <?php if ($no == 1) {
+                                        echo 'active';
+                                    } ?>">
+                                        <img src="<?= base_url('assets/images/carousel/') . $c['foto'] ?>" class="d-block w-100"
+                                            alt="">
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h5 class="text-white"><?= $c['judul'] ?></h5>
+                                        </div>
+                                    </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
+    </div>
     </div>
     <!-- end of .container-->
 
@@ -39,33 +43,33 @@
         <h1 class="fs-lg-6 fs-md-5 fs-3">Letest News</h1>
         <div class="row mt-5 gx-xl-7">
             <?php foreach ($konten as $k): ?>
-                                        <div class="col-lg-4 col-md-6 mb-5 mb-md-0 text-center text-md-start h-auto">
-                                            <div class="d-flex justify-content-between flex-column h-100"><a href="#"><img
-                                                        class="w-md-100 w-75 rounded-2"
-                                                        src="<?= base_url('assets/images/konten/') . $k['foto'] ?>" alt="" /></a>
-                                                <div class="d-flex align-items-center justify-content-center justify-content-md-start gap-2 mt-3"><a
-                                                        href="#">
-                                                        <p class="fw-bold mb-0 text-black"><?= $k['nama_kategori'] ?></p>
-                                                    </a>
-                                                    <p class="mb-0"><?= $k['tanggal']; ?></p>
-                                                </div><a href="#">
-                                                    <h5 class="mt-1 mb-3 fs-0 fs-md-1"><?= $k['keterangan'] ?></h5>
-                                                </a>
-                                                <div
-                                                    class="d-flex align-items-center justify-content-center justify-content-md-start gap-3 mb-md-5">
-                                                    <p class="mb-0 fw-bold">By</p>
-                                                    <p class="mb-0 text-gray"><?= $k['username'] ?></p>
-                                    
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
+                            <div class="col-lg-4 col-md-6 mb-5 mb-md-0 text-center text-md-start h-auto">
+                                <div class="d-flex justify-content-between flex-column h-100"><a href="#"><img
+                                            class="w-md-100 w-75 rounded-2" src="<?= base_url('assets/images/konten/') . $k['foto'] ?>"
+                                            alt="" /></a>
+                                    <div class="d-flex align-items-center justify-content-center justify-content-md-start gap-2 mt-3"><a
+                                            href="#">
+                                            <p class="fw-bold mb-0 text-black"><?= $k['nama_kategori'] ?></p>
+                                        </a>
+                                        <p class="mb-0"><?= $k['tanggal']; ?></p>
+                                    </div><a href="#">
+                                        <h5 class="mt-1 mb-3 fs-0 fs-md-1"><?= $k['keterangan'] ?></h5>
+                                    </a>
+                                    <div
+                                        class="d-flex align-items-center justify-content-center justify-content-md-start gap-3 mb-md-5">
+                                        <p class="mb-0 fw-bold">By</p>
+                                        <p class="mb-0 text-gray"><?= $k['username'] ?></p>
+
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
             <?php endforeach; ?>
-        <div class="text-center mb-4">
-            <button class="btn btn-outline-dark">Load More</button>
+            <div class="text-center mb-4">
+                <button class="btn btn-outline-dark">Load More</button>
+            </div>
         </div>
-    </div>
-    <!-- end of .container-->
+        <!-- end of .container-->
 
 </section>
 <!-- <section> close ============================-->
