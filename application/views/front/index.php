@@ -116,16 +116,16 @@
             <div class="carousel-inner">
                 <?php $no = 1;
                 foreach ($carousel as $c): ?>
-                        <div class="carousel-item <?php if ($no == 1) {
-                            echo 'active';
-                        } ?>">
-                            <img src="<?= base_url('assets/images/carousel/') . $c['foto'] ?>" class="rounded-2 d-block w-100"
-                                alt="">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h3 class="text-white"><?= $c['judul'] ?></h3>
-                                <hr />
-                            </div>
-                        </div>
+                                <div class="carousel-item <?php if ($no == 1) {
+                                    echo 'active';
+                                } ?>">
+                                    <img src="<?= base_url('assets/images/carousel/') . $c['foto'] ?>" class="rounded-2 d-block w-100"
+                                        alt="">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h3 class="text-white"><?= $c['judul'] ?></h3>
+                                        <hr />
+                                    </div>
+                                </div>
                 <?php endforeach; ?>
             </div>
         </div>
@@ -290,33 +290,33 @@
             <?php $counter = 0;
             foreach ($konten as $k):
                 $counter++; ?>
-                    <div class="col-lg-4 col-md-6 mb-5 mb-md-0 text-center text-md-start h-auto">
-                        <div class="d-flex justify-content-between flex-column h-100"><a href="#"><img
-                                    class="w-md-100 w-75 rounded-2" src="<?= base_url('assets/images/konten/') . $k['foto'] ?>"
-                                    alt="" /></a>
-                            <div class="d-flex align-items-center justify-content-center justify-content-md-start gap-2 mt-3"><a
-                                    href="#">
-                                    <p class="fw-bold mb-0 text-black"><?= $k['nama_kategori'] ?></p>
-                                </a>
-                                <p class="mb-0"><?= $k['tanggal']; ?></p>
-                            </div><a href="#">
-                                <h5 class="mt-1 mb-3 fs-0 fs-md-1"><?= $k['keterangan'] ?></h5>
-                            </a>
-                            <div
-                                class="d-flex align-items-center justify-content-center justify-content-md-start gap-3 mb-md-5">
-                                <p class="mb-0 fw-bold">By</p>
-                                <p class="mb-0 text-gray"><?= $k['username'] ?></p>
+                            <div class="col-lg-4 col-md-6 mb-5 mb-md-0 text-center text-md-start h-auto">
+                                <div class="d-flex justify-content-between flex-column h-100"><a href="#"><img
+                                            class="w-md-100 w-75 rounded-2" src="<?= base_url('assets/images/konten/') . $k['foto'] ?>"
+                                            alt="" /></a>
+                                    <div class="d-flex align-items-center justify-content-center justify-content-md-start gap-2 mt-3"><a
+                                            href="#">
+                                            <p class="fw-bold mb-0 text-black"><?= $k['nama_kategori'] ?></p>
+                                        </a>
+                                        <p class="mb-0"><?= $k['tanggal']; ?></p>
+                                    </div><a href="#">
+                                        <h5 class="mt-1 mb-3 fs-0 fs-md-1"><?= $k['keterangan'] ?></h5>
+                                    </a>
+                                    <div
+                                        class="d-flex align-items-center justify-content-center justify-content-md-start gap-3 mb-md-5">
+                                        <p class="mb-0 fw-bold">By</p>
+                                        <p class="mb-0 text-gray"><?= $k['username'] ?></p>
 
-                                </a>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <?php if ($counter == 3) {
-                        break;
-                    }
+                            <?php if ($counter == 3) {
+                                break;
+                            }
             endforeach; ?>
             <div class="text-center mb-4">
-                <button class="btn btn-outline-dark">Load More</button>
+                <a href="<?= base_url('blog/#blog') ?>" class="btn btn-outline-dark">Load More</a>
             </div>
         </div>
         <!-- end of .container-->
