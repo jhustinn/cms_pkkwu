@@ -95,12 +95,6 @@ class Content extends CI_Controller
         }
     }
 
-    // Edit
-    public function editPhoto()
-    {
-
-    }
-
 
     // Edit User
     public function editContent()

@@ -10,6 +10,10 @@ class Category extends CI_Controller
         is_logged_in();
         $this->load->library('form_validation');
         $this->load->model('User_model', 'user');
+        $this->load->model('Config_model', 'configu');
+        $this->load->model('Content_model', 'konten');
+        $this->load->model('Gallery_model', 'galeri');
+        $this->load->model('Category_model', 'kategori');
 
 
     }
@@ -98,6 +102,19 @@ class Category extends CI_Controller
             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Failed to delete category!</div>');
             redirect('category');
         }
+    }
+
+    public function kategori($k)
+    {
+        $data['konten'] = $this->konten->getContentByCategory($k);
+        $data['title'] = "Blog";
+        $data['gallery'] = $this->db->get('gallery')->result_array();
+        $data['config'] = $this->configu->getConfiguration();
+        $data['galeri'] = $this->galeri->getGaleri();
+        $data['kategori'] = $this->kategori->getCategory();
+        $this->load->view('front/template/header', $data);
+        $this->load->view('front/index', $data);
+        $this->load->view('front/template/footer', $data);
     }
 
 }
