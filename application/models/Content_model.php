@@ -16,11 +16,23 @@ class Content_model extends CI_Model
         return $this->db->get()->result_array();
 
     }
-    public function getContentFotoId($id)
+    public function getContentBySlug($id)
     {
-
-        return $this->db->get_where('konten', ['foto' => $id])->result_array();
-
+        $this->db->select('a.*, b.*'); // Select the columns you need from both tables
+        $this->db->from('konten a');
+        $this->db->join('kategori b', 'a.id_kategori = b.id_kategori', 'left');
+        $this->db->where(['a.slug' => $id]); // Use 'a.slug' to specify the column from the 'konten' table
+        return $this->db->get()->result_array();
     }
+
+    public function getContentDetail($id)
+    {
+        $this->db->select('a.*, b.*'); // Select the columns you need from both tables
+        $this->db->from('konten a');
+        $this->db->join('kategori b', 'a.id_kategori = b.id_kategori', 'left');
+        $this->db->where('a.slug !=', $id); // Use 'a.slug !=' to specify that the slug should not be equal to $id
+        return $this->db->get()->result_array();
+    }
+
 
 }

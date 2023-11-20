@@ -1,49 +1,46 @@
-<!DOCTYPE html>
-<!--
-Template Name: Midone - HTML Admin Dashboard Template
-Author: Left4code
-Website: http://www.left4code.com/
-Contact: muhammadrizki@left4code.com
-Purchase: https://themeforest.net/user/left4code/portfolio
-Renew Support: https://themeforest.net/user/left4code/portfolio
-License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
--->
-<html lang="en">
-    <!-- BEGIN: Head -->
-    <head>
-        <meta charset="utf-8">
-        <link href="dist/images/logo.svg" rel="shortcut icon">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="Midone admin is super flexible, powerful, clean & modern responsive tailwind admin template with unlimited possibilities.">
-        <meta name="keywords" content="admin template, Midone admin template, dashboard template, flat admin template, responsive admin template, web app">
-        <meta name="author" content="LEFT4CODE">
-        <link rel="icon" type="image/x-icon" href="<?= base_url('assets') ?>/images/smkn2kra-removebg-preview.png">
-        <title><?= $title ?></title>
-        <!-- BEGIN: CSS Assets-->
-        <link rel="stylesheet" href="<?= base_url('assets/') ?>dist/css/app.css" />
-        <!-- END: CSS Assets-->
-    </head>
-    <!-- END: Head -->
-    <body class="app">
-        <div class="container">
-            <!-- BEGIN: Error Page -->
-            <div class="error-page flex flex-col lg:flex-row items-center justify-center h-screen text-center lg:text-left">
-                <div class="-intro-x lg:mr-20">
-                    <img alt="Midone Tailwind HTML Admin Template" class="h-48 lg:h-auto" src="<?= base_url('assets/') ?>dist/images/error-illustration.svg">
+<div class="d-flex align-items-center justify-content-center vh-100">
+    <div class="text-center">
+        <h1 class="display-1 fw-bold">404</h1>
+        <p class="fs-3"> <span class="text-danger">Opps!</span> Content not found.</p>
+        <p class="lead">
+            The page you’re looking for doesn’t exist.
+        </p>
+        <a href="<?= base_url() ?>" class="btn btn-primary">Go Home</a>
+    </div>
+</div>
+<section class="py-0" id="blog">
+    <div class="container">
+        <h1 class="fs-lg-6 fs-md-5 fs-3">Blog Kami</h1>
+        <div class="row mt-5 gx-xl-7">
+            <?php foreach ($konten as $k):
+                $tanggal = new DateTime($k['tanggal']); ?>
+                <div class="col-lg-4 col-md-6 mb-5 mb-md-0 text-center text-md-start h-auto">
+                    <div class="d-flex justify-content-between flex-column h-100"><a href="<?= base_url('blog/' . $k['slug']) ?>"><img
+                                class="w-md-100 w-75 rounded-2" src="<?= base_url('assets/images/konten/') . $k['foto'] ?>"
+                                alt=""></a>
+                        <div class="d-flex align-items-center justify-content-center justify-content-md-start gap-2 mt-3"><a
+                                href="#">
+                                <p class="fw-bold mb-0 text-black"><?= $k['nama_kategori'] ?></p>
+                            </a>
+                            <p class="mb-0"><?= $tanggal->format('M, Y-d') ?></p>
+                        </div><a href="#">
+                            <h5 class="mt-1 mb-3 fs-0 fs-md-1"><?php if (strlen($k['keterangan']) > 40) {
+                                // If it is, truncate the text and append '...read more'
+                                echo substr($k['keterangan'], 0, 40) . ' <a style="color: blue;" href="' . $k['slug'] . '">...Lihat</a>';
+                            } else {
+                                // If not, use the original text
+                                echo $k['keterangan'];
+                            } ?></h5>
+                        </a>
+                        <div
+                            class="d-flex align-items-center justify-content-center justify-content-md-start gap-3 mb-md-5">
+                            <p class="mb-0 fw-bold">By</p>
+                            <p class="mb-0 text-gray"><?= $k['username'] ?></p>
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div class="text-white mt-10 lg:mt-0">
-                    <div class="intro-x text-6xl font-medium">404 Not Found!</div>
-                    <div class="intro-x text-xl lg:text-3xl font-medium">Oops. This page has gone missing.</div>
-                    <div class="intro-x text-lg mt-3">You may have mistyped the address or the page may have moved.</div>
-                    <a href="<?= base_url('') ?>"><button class="intro-x button button--lg border border-white mt-10">Back to Home</button></a>
-                </div>
-            </div>
-            <!-- END: Error Page -->
-        </div>
-        <!-- BEGIN: JS Assets-->
-        <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=["your-google-map-api"]&libraries=places"></script>
-        <script src="<?= base_url('assets/') ?>dist/js/app.js"></script>
-        <!-- END: JS Assets-->
-    </body>
-</html>
+            <?php endforeach; ?>
+
+        </div><!-- end of .container-->
+</section>

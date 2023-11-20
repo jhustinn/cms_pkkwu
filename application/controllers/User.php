@@ -64,6 +64,13 @@ class User extends CI_Controller
 
     }
 
-    // Edit User Modal
+    public function deleteUser($id)
+    {
+        $this->db->delete('user', ['id_user' => $id]);
+        $this->session->set_flashdata('message', '
+        <div class="alert alert-primary" role="alert"> Berhasil Menghapus User! </div>
+        ');
+        redirect('user');
+    }
 
 }
