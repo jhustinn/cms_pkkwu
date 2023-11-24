@@ -88,6 +88,7 @@
 <script src="<?= base_url('vendor/boldo-1.0.0/public/') ?>vendors/swiper/swiper-bundle.min.js"></script>
 <script src="<?= base_url('vendor/boldo-1.0.0/public/') ?>assets/js/theme.js"></script>
 
+
 </body>
 
 </html>
