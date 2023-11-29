@@ -55,9 +55,9 @@
                         <li class="nav-item"><a class="nav-link" aria-current="page" href="<?= base_url('blog/'); ?>">Blogs</a>
                         <li class="nav-item"><a class="nav-link" aria-current="page" href="<?= base_url('front/gallery') ?>">Our Work</a></li>
                         </li>
-                        <li class="nav-item mt-2 mt-lg-0"><a
+                        <!-- <li class="nav-item mt-2 mt-lg-0"><a
                                 class="nav-link btn btn-light text-black w-md-25 w-50 w-lg-100" aria-current="page"
-                                href="<?= base_url('auth') ?>">Log In</a></li>
+                                href="<?= base_url('auth') ?>">Log In</a></li> -->
                     </ul>
                 </div>
             </div>
