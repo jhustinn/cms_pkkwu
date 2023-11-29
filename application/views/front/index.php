@@ -12,13 +12,16 @@
                     <h1 class="text-white fs-5 fs-xl-6">Save time by building fast with Boldo Template</h1>
                     <p class="text-white py-lg-3 py-2">Funding handshake buyer business-to-business metrics iPad
                         partnership. First mover advantage innovator success deployment non-disclosure.</p>
-                    <div class="d-sm-flex align-items-center gap-3"><a href="https://wa.me/+6281548543722?text=Halo, saya mau membuat website." target="_blank"
+                    <div class="d-sm-flex align-items-center gap-3"><a
+                            href="https://wa.me/+6281548543722?text=Halo, saya mau membuat website." target="_blank"
                             class="btn btn-success text-black mb-3 w-75"><svg
                                 style="margin-right: 4px;margin-bottom: 3px;" xmlns="http://www.w3.org/2000/svg"
                                 width="20" height="20" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16">
                                 <path
                                     d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z" />
-                            </svg> WhatsApp</a><a href="https://mail.google.com/mail/u/0/?view=cm&tf=1&fs=1&to=rexidesign.co@gmail.com" target="_blank" class="btn btn-outline-light mb-3 w-75"><svg
+                            </svg> WhatsApp</a><a
+                            href="https://mail.google.com/mail/u/0/?view=cm&tf=1&fs=1&to=rexidesign.co@gmail.com"
+                            target="_blank" class="btn btn-outline-light mb-3 w-75"><svg
                                 style="margin-right: 4px;margin-bottom: 3px;" xmlns="http://www.w3.org/2000/svg"
                                 width="20" height="20" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
                                 <path
@@ -112,21 +115,21 @@
 
 <div class="container">
     <div class="border-bottom border-dark py-7">
-        <div id="carouselExampleCaptions" class="carousel slide p-5" data-bs-ride="carousel">
-            <div class="carousel-inner">
+        <div id="carouselExampleCaptions" class="carousel slide carousel-fade p-5" data-bs-ride="carousel">
+            <div class="carousel-inner rounded-2">
                 <?php $no = 1;
                 foreach ($carousel as $c): ?>
-                                        <div class="carousel-item <?php if ($no == 1) {
-                                            echo 'active';
-                                        } ?>">
-                                            <img src="<?= base_url('assets/images/carousel/') . $c['foto'] ?>" class="rounded-2 d-block w-100"
-                                                alt="">
-                                            <div class="carousel-caption d-none d-md-block">
-                                                <h3 class="text-white"><?= $c['judul'] ?></h3>
-                                                <hr />
+                                            <div class="carousel-item <?php if ($no == 1) {
+                                                echo 'active';
+                                            } ?>">
+                                                <img src="<?= base_url('assets/images/carousel/') . $c['foto'] ?>" class="rounded-2 w-100"
+                                                    alt="">
+                                                <div class="carousel-caption d-none d-md-block">
+                                                    <h3 class="text-white"><?= $c['judul'] ?></h3>
+                                                    <hr />
+                                                </div>
                                             </div>
-                                        </div>
-                <?php endforeach; ?>
+                                <?php $no++; endforeach; ?>
             </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
@@ -142,6 +145,8 @@
     </div>
 </div>
 </div>
+
+
 
 <section>
     <div class="container">
@@ -290,34 +295,34 @@
             <?php $counter = 0;
             foreach ($konten as $k):
                 $counter++; ?>
-                                    <div class="col-lg-4 col-md-6 mb-5 mb-md-0 text-center text-md-start h-auto">
-                                        <div class="d-flex justify-content-between flex-column h-100"><a
-                                                href="<?= base_url('blog/' . $k['slug']) ?>"><img class="w-md-100 w-75 rounded-2"
-                                                    src="<?= base_url('assets/images/konten/') . $k['foto'] ?>" alt="" /></a>
-                                            <div class="d-flex align-items-center justify-content-center justify-content-md-start gap-2 mt-3">
+                                        <div class="col-lg-4 col-md-6 mb-5 mb-md-0 text-center text-md-start h-auto">
+                                            <div class="d-flex justify-content-between flex-column h-100"><a
+                                                    href="<?= base_url('blog/' . $k['slug']) ?>"><img class="w-md-100 w-75 rounded-2"
+                                                        src="<?= base_url('assets/images/konten/') . $k['foto'] ?>" alt="" /></a>
+                                                <div class="d-flex align-items-center justify-content-center justify-content-md-start gap-2 mt-3">
                                                     <p class="fw-bold mb-0 text-black"><?= $k['nama_kategori'] ?></p>
-                                                <p class="mb-0"><?= $k['tanggal']; ?></p>
-                                            </div><a href="<?= base_url('blog/' . $k['slug']) ?>">
-                                                <h5 class="mt-1 mb-3 fs-0 fs-md-1"><?php if (strlen($k['keterangan']) > 40) {
-                                                    // If it is, truncate the text and append '...read more'
-                                                    echo substr($k['keterangan'], 0, 40) . ' <a style="color: blue;" href="blog/' . $k['slug'] . '">...Lihat</a>';
-                                                } else {
-                                                    // If not, use the original text
-                                                    echo $k['keterangan'];
-                                                } ?></h5>
-                                            </a>
-                                            <div
-                                                class="d-flex align-items-center justify-content-center justify-content-md-start gap-3 mb-md-5">
-                                                <p class="mb-0 fw-bold">By</p>
-                                                <p class="mb-0 text-gray"><?= $k['username'] ?></p>
-
+                                                    <p class="mb-0"><?= $k['tanggal']; ?></p>
+                                                </div><a href="<?= base_url('blog/' . $k['slug']) ?>">
+                                                    <h5 class="mt-1 mb-3 fs-0 fs-md-1"><?php if (strlen($k['keterangan']) > 40) {
+                                                        // If it is, truncate the text and append '...read more'
+                                                        echo substr($k['keterangan'], 0, 40) . ' <a style="color: blue;" href="blog/' . $k['slug'] . '">...Lihat</a>';
+                                                    } else {
+                                                        // If not, use the original text
+                                                        echo $k['keterangan'];
+                                                    } ?></h5>
                                                 </a>
+                                                <div
+                                                    class="d-flex align-items-center justify-content-center justify-content-md-start gap-3 mb-md-5">
+                                                    <p class="mb-0 fw-bold">By</p>
+                                                    <p class="mb-0 text-gray"><?= $k['username'] ?></p>
+
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <?php if ($counter == 3) {
-                                        break;
-                                    }
+                                        <?php if ($counter == 3) {
+                                            break;
+                                        }
             endforeach; ?>
             <div class="text-center mb-4">
                 <a href="<?= base_url('blog/#blog') ?>" class="btn btn-outline-dark">Load More</a>

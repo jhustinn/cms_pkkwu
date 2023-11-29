@@ -77,6 +77,7 @@
 <!-- ===============================================-->
 <!--    JavaScripts-->
 <!-- ===============================================-->
+
 <script src="<?= base_url('vendor/boldo-1.0.0/public/') ?>vendors/popper/popper.min.js"></script>
 <script src="<?= base_url('vendor/boldo-1.0.0/public/') ?>vendors/bootstrap/bootstrap.min.js"></script>
 <script src="<?= base_url('vendor/boldo-1.0.0/public/') ?>vendors/anchorjs/anchor.min.js"></script>
