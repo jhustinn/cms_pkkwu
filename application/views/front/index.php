@@ -10,7 +10,8 @@
             <div class="row align-items-center py-lg-8 py-6">
                 <div class="col-lg-6 text-center text-lg-start">
                     <h1 class="text-white fs-5 fs-xl-6">Cepat, Hemat, dan Aman!</h1>
-                    <p class="text-white py-lg-3 py-2">Jika ingin membuat, dan membangun website terpercaya silahkan hubungi email dan WhatsApp di bawah ini. di Akun resmi kami!</p>
+                    <p class="text-white py-lg-3 py-2">Jika ingin membuat, dan membangun website terpercaya silahkan
+                        hubungi email dan WhatsApp di bawah ini. di Akun resmi kami!</p>
                     <div class="d-sm-flex align-items-center gap-3"><a
                             href="https://wa.me/+6281548543722?text=Halo, saya mau membuat website." target="_blank"
                             class="btn btn-success text-black mb-3 w-75"><svg
@@ -118,17 +119,16 @@
             <div class="carousel-inner rounded-2">
                 <?php $no = 1;
                 foreach ($carousel as $c): ?>
-                                                                                                <div class="carousel-item <?php if ($no == 1) {
-                                                                                                    echo 'active';
-                                                                                                } ?>">
-                                                                                                    <img src="<?= base_url('assets/images/carousel/') . $c['foto'] ?>" class="rounded-2 w-100"
-                                                                                                        alt="">
-                                                                                                    <div class="carousel-caption d-none d-md-block">
-                                                                                                        <h3 class=""><?= $c['judul'] ?></h3>
-                                                                                                        <hr />
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                    <?php $no++; endforeach; ?>
+                                            <div class="carousel-item <?php if ($no == 1) {
+                                                echo 'active';
+                                            } ?>">
+                                                <img src="<?= base_url('assets/images/carousel/') . $c['foto'] ?>" class="rounded-2 w-100" alt="">
+                                                <div class="carousel-caption d-none d-md-block">
+                                                    <h3 class=""><?= $c['judul'] ?></h3>
+                                                    <hr />
+                                                </div>
+                                            </div>
+                                            <?php $no++; endforeach; ?>
             </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
@@ -150,8 +150,7 @@
 <section>
     <div class="container">
         <p class="text-center fs-1">Our Services</p>
-        <h2 class="mx-auto text-center fs-lg-6 fs-md-5 w-lg-75">Handshake infographic mass market crowdfunding
-            iteration.</h2>
+        <h2 class="mx-auto text-center fs-lg-6 fs-md-5 w-lg-75">Admin Social Media yang selalu memantau.</h2>
     </div><!-- end of .container-->
 </section>
 
@@ -161,8 +160,7 @@
             <div class="col-lg-6 text-center text-lg-start"><img class="img-fluid" src="assets/40831.jpg" alt="">
             </div>
             <div class="col-lg-6">
-                <h1 class="fs-xl-5 fs-lg-4 fs-3">We connect our customers with the best, and help them keep up-and stay
-                    open.</h1>
+                <h1 class="fs-xl-5 fs-lg-4 fs-3">Kami menyediakan pelayanan yang maksimal bagi pelanggan mami, di social media maupun website.</h1>
                 <ul class="list-unstyled my-xl-5 my-3">
                     <li class="fs-2 my-4 d-flex align-items-center gap-3 text-black"><svg
                             class="svg-inline--fa fa-circle-check fs-4 text-dark" aria-hidden="true" focusable="false"
@@ -172,8 +170,7 @@
                                 d="M0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256zM371.8 211.8C382.7 200.9 382.7 183.1 371.8 172.2C360.9 161.3 343.1 161.3 332.2 172.2L224 280.4L179.8 236.2C168.9 225.3 151.1 225.3 140.2 236.2C129.3 247.1 129.3 264.9 140.2 275.8L204.2 339.8C215.1 350.7 232.9 350.7 243.8 339.8L371.8 211.8z">
                             </path>
                         </svg>
-                        <!-- <i class="fa-solid fa-circle-check fs-4 text-dark"></i> Font Awesome fontawesome.com --><span>We
-                            connect our customers with the best.</span></li>
+                        <!-- <i class="fa-solid fa-circle-check fs-4 text-dark"></i> Font Awesome fontawesome.com --><span>Respon Cepat.</span></li>
                     <li class="fs-2 my-4 d-flex align-items-center gap-3 text-black"><svg
                             class="svg-inline--fa fa-circle-check fs-4 text-dark" aria-hidden="true" focusable="false"
                             data-prefix="fas" data-icon="circle-check" role="img" xmlns="http://www.w3.org/2000/svg"
@@ -182,8 +179,7 @@
                                 d="M0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256zM371.8 211.8C382.7 200.9 382.7 183.1 371.8 172.2C360.9 161.3 343.1 161.3 332.2 172.2L224 280.4L179.8 236.2C168.9 225.3 151.1 225.3 140.2 236.2C129.3 247.1 129.3 264.9 140.2 275.8L204.2 339.8C215.1 350.7 232.9 350.7 243.8 339.8L371.8 211.8z">
                             </path>
                         </svg>
-                        <!-- <i class="fa-solid fa-circle-check fs-4 text-dark"></i> Font Awesome fontawesome.com --><span>Advisor
-                            success customer launch party.</span></li>
+                        <!-- <i class="fa-solid fa-circle-check fs-4 text-dark"></i> Font Awesome fontawesome.com --><span>Pelayanan Terjamin.</span></li>
                     <li class="fs-2 my-4 d-flex align-items-center gap-3 text-black"><svg
                             class="svg-inline--fa fa-circle-check fs-4 text-dark" aria-hidden="true" focusable="false"
                             data-prefix="fas" data-icon="circle-check" role="img" xmlns="http://www.w3.org/2000/svg"
@@ -192,8 +188,7 @@
                                 d="M0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256zM371.8 211.8C382.7 200.9 382.7 183.1 371.8 172.2C360.9 161.3 343.1 161.3 332.2 172.2L224 280.4L179.8 236.2C168.9 225.3 151.1 225.3 140.2 236.2C129.3 247.1 129.3 264.9 140.2 275.8L204.2 339.8C215.1 350.7 232.9 350.7 243.8 339.8L371.8 211.8z">
                             </path>
                         </svg>
-                        <!-- <i class="fa-solid fa-circle-check fs-4 text-dark"></i> Font Awesome fontawesome.com --><span>Business-to-consumer
-                            long tail.</span></li>
+                        <!-- <i class="fa-solid fa-circle-check fs-4 text-dark"></i> Font Awesome fontawesome.com --><span>Membangun Kepercayaan Dengan Pelanggan.</span></li>
                 </ul><button class="btn btn-dark">Start now</button>
             </div>
         </div>
@@ -253,34 +248,34 @@
             <?php $counter = 0;
             foreach ($konten as $k):
                 $counter++; ?>
-                                                                                            <div class="col-lg-4 col-md-6 mb-5 mb-md-0 text-center text-md-start h-auto">
-                                                                                                <div class="d-flex justify-content-between flex-column h-100"><a
-                                                                                                        href="<?= base_url('blog/' . $k['slug']) ?>"><img class="w-md-100 w-75 rounded-2"
-                                                                                                            src="<?= base_url('assets/images/konten/') . $k['foto'] ?>" alt="" /></a>
-                                                                                                    <div class="d-flex align-items-center justify-content-center justify-content-md-start gap-2 mt-3">
-                                                                                                        <p class="fw-bold mb-0 text-black"><?= $k['nama_kategori'] ?></p>
-                                                                                                        <p class="mb-0"><?= $k['tanggal']; ?></p>
-                                                                                                    </div><a href="<?= base_url('blog/' . $k['slug']) ?>">
-                                                                                                        <h5 class="mt-1 mb-3 fs-0 fs-md-1"><?php if (strlen($k['keterangan']) > 40) {
-                                                                                                            // If it is, truncate the text and append '...read more'
-                                                                                                            echo substr($k['keterangan'], 0, 40) . ' <a style="color: blue;" href="blog/' . $k['slug'] . '">...Lihat</a>';
-                                                                                                        } else {
-                                                                                                            // If not, use the original text
-                                                                                                            echo $k['keterangan'];
-                                                                                                        } ?></h5>
-                                                                                                    </a>
-                                                                                                    <div
-                                                                                                        class="d-flex align-items-center justify-content-center justify-content-md-start gap-3 mb-md-5">
-                                                                                                        <p class="mb-0 fw-bold">By</p>
-                                                                                                        <p class="mb-0 text-gray"><?= $k['username'] ?></p>
+                                        <div class="col-lg-4 col-md-6 mb-5 mb-md-0 text-center text-md-start h-auto">
+                                            <div class="d-flex justify-content-between flex-column h-100"><a
+                                                    href="<?= base_url('blog/' . $k['slug']) ?>"><img class="w-md-100 w-75 rounded-2"
+                                                        src="<?= base_url('assets/images/konten/') . $k['foto'] ?>" alt="" /></a>
+                                                <div class="d-flex align-items-center justify-content-center justify-content-md-start gap-2 mt-3">
+                                                    <p class="fw-bold mb-0 text-black"><?= $k['nama_kategori'] ?></p>
+                                                    <p class="mb-0"><?= $k['tanggal']; ?></p>
+                                                </div><a href="<?= base_url('blog/' . $k['slug']) ?>">
+                                                    <h5 class="mt-1 mb-3 fs-0 fs-md-1"><?php if (strlen($k['keterangan']) > 40) {
+                                                        // If it is, truncate the text and append '...read more'
+                                                        echo substr($k['keterangan'], 0, 40) . ' <a style="color: blue;" href="blog/' . $k['slug'] . '">...Lihat</a>';
+                                                    } else {
+                                                        // If not, use the original text
+                                                        echo $k['keterangan'];
+                                                    } ?></h5>
+                                                </a>
+                                                <div
+                                                    class="d-flex align-items-center justify-content-center justify-content-md-start gap-3 mb-md-5">
+                                                    <p class="mb-0 fw-bold">By</p>
+                                                    <p class="mb-0 text-gray"><?= $k['username'] ?></p>
 
-                                                                                                        </a>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <?php if ($counter == 3) {
-                                                                                                break;
-                                                                                            }
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <?php if ($counter == 3) {
+                                            break;
+                                        }
             endforeach; ?>
             <div class="text-center mb-4">
                 <a href="<?= base_url('blog/#blog') ?>" class="btn btn-outline-dark">Load More</a>

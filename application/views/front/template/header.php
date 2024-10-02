@@ -53,7 +53,7 @@
                     <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
                         <li class="nav-item"><a class="nav-link" aria-current="page" href="<?= base_url('home') ?>">Home</a></li>
                         <li class="nav-item"><a class="nav-link" aria-current="page" href="<?= base_url('blog/'); ?>">Blogs</a>
-                        <li class="nav-item"><a class="nav-link" aria-current="page" href="<?= base_url('front/gallery') ?>">Our Work</a></li>
+                        <li class="nav-item"><a class="nav-link" aria-current="page" href="<?= base_url('works') ?>">Our Work</a></li>
                         </li>
                         <!-- <li class="nav-item mt-2 mt-lg-0"><a
                                 class="nav-link btn btn-light text-black w-md-25 w-50 w-lg-100" aria-current="page"
